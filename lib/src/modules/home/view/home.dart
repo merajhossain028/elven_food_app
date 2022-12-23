@@ -1,5 +1,7 @@
-import 'package:elven_food_app/src/modules/home/components/background.dart';
+import 'dart:ui';
+
 import 'package:elven_food_app/src/modules/home/components/custom_text.dart';
+import 'package:elven_food_app/src/modules/home/components/gridview_picks.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -17,25 +19,34 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const Background(),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: const Color(0xFFE31640),
-            title: Image.asset(
-              'assets/images/elvan.png',
-              height: 25,
-            ),
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: const Color(0xFFE31640),
+        title: Image.asset(
+          'assets/images/elvan.png',
+          height: 25,
+        ),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/bgImage.png'),
+            fit: BoxFit.cover,
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(10.0),
+        ),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 5,
+            sigmaY: 5,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 22),
                   Row(
                     children: [
                       CustomHeadingText(
@@ -70,47 +81,46 @@ class _HomeState extends State<Home> {
                       ),
                     ],
                   ),
+                  GridViewPicks(),
                 ],
               ),
             ),
           ),
-          bottomNavigationBar: Container(
-            decoration: const BoxDecoration(
-              color: Color(0xFFE31640),
-            ),
-            child: SafeArea(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-                child: GNav(
-                  rippleColor: Colors.grey[300]!,
-                  hoverColor: Colors.grey[100]!,
-                  gap: 8,
-                  activeColor: Color(0xFFE31640),
-                  iconSize: 24,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  duration: const Duration(milliseconds: 400),
-                  tabBackgroundColor: Colors.white,
-                  color: Colors.white,
-                  tabs: const [
-                    GButton(icon: Icons.home),
-                    GButton(icon: Icons.favorite),
-                    GButton(icon: Icons.shopping_cart),
-                    GButton(icon: Icons.person),
-                  ],
-                  selectedIndex: _selectedIndex,
-                  onTabChange: (index) {
-                    setState(() {
-                      _selectedIndex = index;
-                    });
-                  },
-                ),
-              ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFFE31640),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+            child: GNav(
+              rippleColor: Colors.grey[300]!,
+              hoverColor: Colors.grey[100]!,
+              gap: 8,
+              activeColor: const Color(0xFFE31640),
+              iconSize: 24,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              duration: const Duration(milliseconds: 400),
+              tabBackgroundColor: Colors.white,
+              color: Colors.white,
+              tabs: const [
+                GButton(icon: Icons.home),
+                GButton(icon: Icons.favorite),
+                GButton(icon: Icons.shopping_cart),
+                GButton(icon: Icons.person),
+              ],
+              selectedIndex: _selectedIndex,
+              onTabChange: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 }
