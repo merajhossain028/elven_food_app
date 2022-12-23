@@ -41,48 +41,51 @@ class _HomeState extends State<Home> {
             sigmaX: 5,
             sigmaY: 5,
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 22),
-                  Row(
-                    children: [
-                      CustomHeadingText(
-                        title: 'Categories',
-                        fontSize: 28,
-                      ),
-                      const Spacer(),
-                      CustomSubText(subtitle: 'View all'),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  const Catagories(),
-                  const SizedBox(height: 30),
-                  Row(
-                    children: [
-                      CustomHeadingText(
-                        title: 'Recently Ordered',
-                        fontSize: 16,
-                      ),
-                      const Spacer(),
-                      CustomSubText(subtitle: 'View all'),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  const RecentOrder(),
-                  const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      CustomHeadingText(
-                        title: 'Top picks',
-                        fontSize: 28,
-                      ),
-                    ],
-                  ),
-                  GridViewPicks(),
-                ],
+          child: Container(
+            color: Colors.black.withOpacity(0.8),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 22),
+                    Row(
+                      children: [
+                        CustomHeadingText(
+                          title: 'Categories',
+                          fontSize: 28,
+                        ),
+                        const Spacer(),
+                        CustomSubText(subtitle: 'View all'),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    const Catagories(),
+                    const SizedBox(height: 30),
+                    Row(
+                      children: [
+                        CustomHeadingText(
+                          title: 'Recently Ordered',
+                          fontSize: 16,
+                        ),
+                        const Spacer(),
+                        CustomSubText(subtitle: 'View all'),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    const RecentOrder(),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        CustomHeadingText(
+                          title: 'Top picks',
+                          fontSize: 28,
+                        ),
+                      ],
+                    ),
+                    GridViewPicks(),
+                  ],
+                ),
               ),
             ),
           ),
