@@ -5,6 +5,7 @@ import 'package:elven_food_app/src/modules/home/components/gridview_picks.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+import '../../added_item/view/add_item.dart';
 import '../components/catagories.dart';
 import '../components/recent_order_list.dart';
 
@@ -20,13 +21,24 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xFFE31640),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddItems()),
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color(0xFFE31640),
-        title: Image.asset(
-          'assets/images/elvan.png',
-          height: 25,
+        title: Center(
+          child: Image.asset(
+            'assets/images/elvan.png',
+            height: 25,
+          ),
         ),
       ),
       body: Container(
