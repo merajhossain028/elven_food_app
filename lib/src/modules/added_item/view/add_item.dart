@@ -12,7 +12,9 @@ class AddItems extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color(0xFFE31640),
@@ -24,6 +26,8 @@ class AddItems extends ConsumerWidget {
         ),
       ),
       body: Container(
+        height: size.height,
+        width: size.width,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/bgImage.png'),
@@ -36,36 +40,40 @@ class AddItems extends ConsumerWidget {
             sigmaY: 5,
           ),
           child: Container(
+            height: size.height,
+            width: size.width,
             color: Colors.black.withOpacity(0.8),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                children: [
-                  CustomTextField(
-                    controller: ref.watch(categoryCntrlrPd),
-                    labelText: 'Catagory Name',
-                  ),
-                  const SizedBox(height: 20),
-                  CustomTextField(
-                    controller: ref.watch(itemCntrlrPd),
-                    labelText: 'Item Name',
-                  ),
-                  const SizedBox(height: 20),
-                  CustomTextField(
-                    controller: ref.watch(descriptionCntrlrPd),
-                    labelText: 'Description',
-                  ),
-                  const SizedBox(height: 20),
-                  CustomTextField(
-                    controller: ref.watch(priceCntrlrPd),
-                    labelText: 'Price',
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () async => await createCatagory(ref),
-                    child: const Text('Add Catagory Item'),
-                  ),
-                ],
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    CustomTextField(
+                      controller: ref.watch(categoryCntrlrPd),
+                      labelText: 'Catagory Name',
+                    ),
+                    const SizedBox(height: 20),
+                    CustomTextField(
+                      controller: ref.watch(itemCntrlrPd),
+                      labelText: 'Item Name',
+                    ),
+                    const SizedBox(height: 20),
+                    CustomTextField(
+                      controller: ref.watch(descriptionCntrlrPd),
+                      labelText: 'Description',
+                    ),
+                    const SizedBox(height: 20),
+                    CustomTextField(
+                      controller: ref.watch(priceCntrlrPd),
+                      labelText: 'Price',
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () async => await createCatagory(ref),
+                      child: const Text('Add Catagory Item'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

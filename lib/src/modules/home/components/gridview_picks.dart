@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:elven_food_app/src/configs/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -55,34 +56,35 @@ class GridViewPicks extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         return Container(
-          height: 212,
-          width: 174,
           margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: const Color.fromRGBO(104, 104, 104, 0.7),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: mainMin,
                 children: [
-                  Image.asset(height: 100, '${_gridViewPicks[index]['image']}'),
-                  const Spacer(),
-                  const Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: Icon(
-                      size: 30,
-                      Icons.favorite_rounded,
-                      color: Colors.white,
+                  Expanded(
+                    child: Image.asset('${_gridViewPicks[index]['image']}'),
+                  ),
+                  const Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(12.0, 12.0, 0, 12.0),
+                      child: Icon(
+                        size: 30,
+                        Icons.favorite_rounded,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 5),
+              const Spacer(),
               Padding(
-                padding: const EdgeInsets.all(14.0),
+                padding: const EdgeInsets.fromLTRB(14.0, 0, 14.0, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
