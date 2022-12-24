@@ -74,5 +74,3 @@ class AddItems extends ConsumerWidget {
     );
   }
 }
-
-
