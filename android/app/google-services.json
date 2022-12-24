@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "369281511397",
+    "project_id": "elvan-food-ordering-app",
+    "storage_bucket": "elvan-food-ordering-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369281511397:android:152d2a8db32b67364c490c",
+        "android_client_info": {
+          "package_name": "com.meraj.elven_food_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369281511397-6mfbs1jqgum7h0sbr21oprpamts06iia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDX7V0JpX0n1SbE1xXtnh0s0HS_ibEtBZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369281511397-6mfbs1jqgum7h0sbr21oprpamts06iia.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

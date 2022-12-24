@@ -53,7 +53,7 @@ class GridViewPicks extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         return Container(
-          height: 211,
+          height: 212,
           width: 174,
           margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
@@ -101,7 +101,6 @@ class GridViewPicks extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    const SizedBox(height: 5),
                     Row(
                       children: [
                         Text(
