@@ -1,24 +1,17 @@
 import 'dart:ui';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:elven_food_app/src/modules/added_item/functions/create_category.dart';
+import 'package:elven_food_app/src/modules/added_item/provider/add_item_pd.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/custom_text_field.dart';
 
-class AddItems extends StatefulWidget {
+class AddItems extends ConsumerWidget {
   const AddItems({super.key});
 
   @override
-  State<AddItems> createState() => _AddItemsState();
-}
-
-class _AddItemsState extends State<AddItems> {
-  final controllerCatagory = TextEditingController();
-  final controllerItem = TextEditingController();
-  final controllerDescription = TextEditingController();
-  final controllerPrice = TextEditingController();
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -49,29 +42,27 @@ class _AddItemsState extends State<AddItems> {
               child: Column(
                 children: [
                   CustomTextField(
-                      controller: controllerCatagory,
-                      labelText: 'Catagory Name'),
+                    controller: ref.watch(categoryCntrlrPd),
+                    labelText: 'Catagory Name',
+                  ),
                   const SizedBox(height: 20),
                   CustomTextField(
-                      controller: controllerItem, labelText: 'Item Name'),
+                    controller: ref.watch(itemCntrlrPd),
+                    labelText: 'Item Name',
+                  ),
                   const SizedBox(height: 20),
                   CustomTextField(
-                      controller: controllerDescription,
-                      labelText: 'Description'),
+                    controller: ref.watch(descriptionCntrlrPd),
+                    labelText: 'Description',
+                  ),
                   const SizedBox(height: 20),
                   CustomTextField(
-                      controller: controllerPrice, labelText: 'Price'),
+                    controller: ref.watch(priceCntrlrPd),
+                    labelText: 'Price',
+                  ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {
-                      final catagory = Catagory(
-                        catagoryName: controllerCatagory.text,
-                        itemName: controllerItem.text,
-                        description: controllerDescription.text,
-                        price: int.parse(controllerPrice.text),
-                      );
-                      createCatagory(catagory);
-                    },
+                    onPressed: () async => await createCatagory(ref),
                     child: const Text('Add Catagory Item'),
                   ),
                 ],
@@ -84,30 +75,4 @@ class _AddItemsState extends State<AddItems> {
   }
 }
 
-Future createCatagory(Catagory catagory) async {
-  final docCatagory =
-      FirebaseFirestore.instance.collection('catagory').doc();
-      catagory.id = docCatagory.id;
-  final json = catagory.toJson();
-  await docCatagory.set(json);
-}
 
-class Catagory {
-  final String catagoryName;
-  final String itemName;
-  final String description;
-  final int price;
-
-  Catagory({
-    required this.catagoryName,
-    required this.itemName,
-    required this.description,
-    required this.price,
-  });
-  Map<String, dynamic> toJson() => {
-        'catagoryName': catagoryName,
-        'itemName': itemName,
-        'description': description,
-        'price': price,
-      };
-}

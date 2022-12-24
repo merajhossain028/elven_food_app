@@ -41,6 +41,8 @@ class GridViewPicks extends StatelessWidget {
       'price': 10.0,
     },
   ];
+
+  GridViewPicks({super.key});
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
