@@ -1,8 +1,8 @@
-
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+final imagepd = StateProvider<File?>((ref) => null);
 final categoryCntrlrPd = Provider((ref) {
   final cntrlr = TextEditingController();
 
@@ -34,3 +34,4 @@ final priceCntrlrPd = Provider((ref) {
 
   return cntrlr;
 });
+

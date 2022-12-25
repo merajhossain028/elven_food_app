@@ -12,15 +12,20 @@ environment:
 dependencies:
   cached_network_image: ^3.2.1
   cloud_firestore: ^4.3.0
+  firebase_auth: ^4.2.3
   firebase_core: ^2.4.0
+  firebase_storage: ^11.0.9
   flutter:
     sdk: flutter
+  flutter_easyloading: ^3.0.5
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.1.1
   flutter_svg: ^1.1.6
   google_fonts: ^3.0.1
   google_nav_bar: ^5.0.6
+  image_cropper: ^3.0.1
+  image_picker: ^0.8.6
   intl: ^0.17.0
   isar: ^2.5.0
   isar_flutter_libs: ^2.5.0

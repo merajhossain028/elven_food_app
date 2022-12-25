@@ -1,10 +1,15 @@
+import 'dart:io';
 import 'dart:ui';
 
+import 'package:elven_food_app/src/configs/size_config.dart';
 import 'package:elven_food_app/src/modules/added_item/functions/create_category.dart';
+import 'package:elven_food_app/src/modules/added_item/functions/upload_image.dart';
 import 'package:elven_food_app/src/modules/added_item/provider/add_item_pd.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../components/take_image/modal_bottom_sheet.dart';
 import '../components/custom_text_field.dart';
 
 class AddItems extends ConsumerWidget {
@@ -13,6 +18,8 @@ class AddItems extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
+    final image = ref.watch(imagepd);
+    String imageUrl = '';
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
@@ -68,8 +75,43 @@ class AddItems extends ConsumerWidget {
                       labelText: 'Price',
                     ),
                     const SizedBox(height: 20),
+                    image == null
+                        ? InkWell(
+                            onTap: () async {
+                              await modalBottomSheetMenu(context).then((pk) =>
+                                  ref.read(imagepd.notifier).update((_) => pk));
+                            },
+                            child: Container(
+                              height: ScreenSize.height * 0.25,
+                              width: ScreenSize.width * 0.7,
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Icon(
+                                size: 50,
+                                Icons.add,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        : Container(
+                            height: ScreenSize.height * 0.25,
+                            width: ScreenSize.width * 0.7,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white, width: 2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Image.file(image),
+                          ),
+                    const SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: () async => await createCatagory(ref),
+                      onPressed: () async {
+                        await createCatagory(ref);
+
+                      
+                      },
                       child: const Text('Add Catagory Item'),
                     ),
                   ],
