@@ -1,11 +1,8 @@
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:elven_food_app/src/configs/size_config.dart';
 import 'package:elven_food_app/src/modules/added_item/functions/create_category.dart';
-import 'package:elven_food_app/src/modules/added_item/functions/upload_image.dart';
 import 'package:elven_food_app/src/modules/added_item/provider/add_item_pd.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,7 +16,7 @@ class AddItems extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final image = ref.watch(imagepd);
-    String imageUrl = '';
+    //String imageUrl = '';
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
