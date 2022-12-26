@@ -97,7 +97,7 @@ class TopPicksGrid extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          categories[index].price.toString(),
+                          '\$${categories[index].price.toString()}',
                           style: GoogleFonts.poppins(
                             fontSize: 28,
                             fontWeight: FontWeight.w600,
