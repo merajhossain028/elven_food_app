@@ -7,7 +7,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../../added_item/view/add_item.dart';
 import '../components/catagories.dart';
-import '../components/grid_card_db.dart';
+import '../components/top_pick_grid.dart';
 import '../components/recent_order_list.dart';
 
 class Home extends StatefulWidget {
