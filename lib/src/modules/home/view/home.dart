@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:elven_food_app/src/modules/home/components/custom_text.dart';
-import 'package:elven_food_app/src/modules/home/components/gridview_picks.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 

@@ -1,54 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../api/home_api.dart';
+import '../provider/catagory_provider.dart';
 
-class Catagories extends StatelessWidget {
+class Catagories extends ConsumerWidget {
   const Catagories({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    List<Map<String, dynamic>> catagories = [
-      {
-        'image': 'assets/images/pizza.png',
-        'title': 'Pizza',
-      },
-      {
-        'image': 'assets/images/juics.png',
-        'title': 'Juice',
-      },
-      {
-        'image': 'assets/images/salad.png',
-        'title': 'Salad',
-      },
-      {
-        'image': 'assets/images/salad.png',
-        'title': 'Salad',
-      },
-      {
-        'image': 'assets/images/salad.png',
-        'title': 'Salad',
-      },
-      {
-        'image': 'assets/images/salad.png',
-        'title': 'Salad',
-      },
-    ];
+  Widget build(BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
           ...List.generate(
-            catagories.length,
+            catagory.length,
             (index) => CatagoriesCard(
-              image: catagories[index]['image'],
-              title: catagories[index]['title'],
+              image: catagory[index]['image'],
+              title: catagory[index]['title'],
               press: () {
-                if (index == 0) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Demo()));
-                  const Color(0xFFE31640);
-                }
+                ref
+                    .read(catagorypd.notifier)
+                    .update((state) => catagory[index]['title']);
               },
             ),
           )
