@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:elven_food_app/src/modules/item_description/view/item_description.dart';
+import 'package:elven_food_app/src/utils/routes/custom_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -38,86 +40,99 @@ class TopPicksGrid extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             return InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  SlideLeftRoute(
+                    page: ItemDescription(
+                      category: categories[index],
+                    ),
+                  ),
+                );
+              },
               child: Container(
-          margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: const Color.fromRGBO(104, 104, 104, 0.7),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Column(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: mainMin,
-                children: [
-                  Expanded(
-                    child: CachedNetworkImage(
-                      imageUrl: categories[index].imageUrl,
-                      placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                      errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
-                    ),
-                  ),
-                  const Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(12.0, 12.0, 0, 12.0),
-                      child: Icon(
-                        size: 30,
-                        Icons.favorite_rounded,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(14.0, 0, 14.0, 0),
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(104, 104, 104, 0.7),
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      categories[index].itemName,
-                      style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      categories[index].description,
-                      style: GoogleFonts.poppins(
-                        textStyle: Theme.of(context).textTheme.labelSmall,
-                        fontSize: 11,
-                        color: Colors.white,
-                      ),
-                    ),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: mainMin,
                       children: [
-                        Text(
-                          '\$${categories[index].price.toString()}',
-                          style: GoogleFonts.poppins(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w600,
-                            color: const Color(0xFFE31640),
+                        Expanded(
+                          child: CachedNetworkImage(
+                            imageUrl: categories[index].imageUrl,
+                            placeholder: (context, url) => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            errorWidget: (context, url, error) =>
+                                const Center(child: Icon(Icons.error)),
                           ),
                         ),
-                        const Spacer(),
-                        const Icon(
-                          Icons.add_circle,
-                          color: Color(0xFFE31640),
-                          size: 30,
+                        const Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(12.0, 12.0, 0, 12.0),
+                            child: Icon(
+                              size: 30,
+                              Icons.favorite_rounded,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ],
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(14.0, 0, 14.0, 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            categories[index].itemName,
+                            style: GoogleFonts.poppins(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            categories[index].description,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.poppins(
+                              textStyle: Theme.of(context).textTheme.labelSmall,
+                              fontSize: 11,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                '\$${categories[index].price.toString()}',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xFFE31640),
+                                ),
+                              ),
+                              const Spacer(),
+                              const Icon(
+                                Icons.add_circle,
+                                color: Color(0xFFE31640),
+                                size: 30,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
             );
           },
         );

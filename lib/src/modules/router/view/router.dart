@@ -7,6 +7,7 @@ import 'package:elven_food_app/src/modules/home/view/home.dart';
 
 import '../../../configs/size_config.dart' show ScreenSize;
 import '../../../localization/loalization.dart' show t;
+import '../../item_description/view/item_description.dart';
 
 class AppRouter extends ConsumerWidget {
   AppRouter({Key? key}) : super(key: key);
@@ -19,5 +20,6 @@ class AppRouter extends ConsumerWidget {
     t = AppLocalizations.of(context);
     // Check if Auth is needed
     return const Home();
+    //return const ItemDescription();
   }
 }
