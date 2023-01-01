@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../../added_item/view/add_item.dart';
+import '../screens/favourite_screen.dart';
 import '../screens/home_screen.dart';
 
 class Home extends StatefulWidget {
@@ -49,9 +50,7 @@ class _HomeState extends State<Home> {
             return index == 0
                 ? const HomeScreen()
                 : index == 1
-                    ? Container(
-                        child: Text('$index'),
-                      )
+                    ? const FavouriteScreen()
                     : index == 2
                         ? Container(
                             child: Text('$index'),
