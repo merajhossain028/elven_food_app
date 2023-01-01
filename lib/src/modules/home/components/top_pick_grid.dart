@@ -12,7 +12,6 @@ import '../provider/catagory_provider.dart';
 
 class TopPicksGrid extends ConsumerWidget {
   const TopPicksGrid({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return StreamBuilder<QuerySnapshot>(
@@ -99,14 +98,27 @@ class TopPicksGrid extends ConsumerWidget {
                                       const Center(child: Icon(Icons.error)),
                                 ),
                               ),
-                              const Expanded(
+                              Expanded(
                                 child: Padding(
-                                  padding:
-                                      EdgeInsets.fromLTRB(12.0, 12.0, 0, 12.0),
-                                  child: Icon(
-                                    size: 30,
-                                    Icons.favorite_rounded,
-                                    color: Colors.white,
+                                  padding: const EdgeInsets.fromLTRB(
+                                      12.0, 12.0, 0, 12.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      ref
+                                          .read(iconColor(categories[index].id).notifier)
+                                          .update((state) => !state);
+                                    },
+                                    child: Consumer(
+                                      builder: (_, ref, __) {
+                                        return Icon(
+                                          size: 30,
+                                          Icons.favorite_rounded,
+                                          color: ref.watch(iconColor(categories[index].id))
+                                              ? Colors.red
+                                              : Colors.white,
+                                        );
+                                      }
+                                    ),
                                   ),
                                 ),
                               ),

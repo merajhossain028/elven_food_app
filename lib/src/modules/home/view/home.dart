@@ -1,13 +1,8 @@
-import 'dart:ui';
-
-import 'package:elven_food_app/src/modules/home/components/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../../added_item/view/add_item.dart';
-import '../components/catagories.dart';
-import '../components/top_pick_grid.dart';
-import '../components/recent_order_list.dart';
+import '../screens/home_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,6 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
+  final PageController controller = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,68 +37,29 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/bgImage.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 5,
-            sigmaY: 5,
-          ),
-          child: Container(
-            color: Colors.black.withOpacity(0.8),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 22),
-                    Row(
-                      children: [
-                        CustomHeadingText(
-                          title: 'Categories',
-                          fontSize: 28,
-                        ),
-                        const Spacer(),
-                        CustomSubText(subtitle: 'View all'),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    const Catagories(),
-                    const SizedBox(height: 30),
-                    Row(
-                      children: [
-                        CustomHeadingText(
-                          title: 'Recently Ordered',
-                          fontSize: 16,
-                        ),
-                        const Spacer(),
-                        CustomSubText(subtitle: 'View all'),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    const RecentOrder(),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        CustomHeadingText(
-                          title: 'Top picks',
-                          fontSize: 28,
-                        ),
-                      ],
-                    ),
-                    const TopPicksGrid(),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+      body: PageView.builder(
+          itemCount: 4,
+          controller: controller,
+          onPageChanged: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          itemBuilder: (context, index) {
+            return index == 0
+                ? const HomeScreen()
+                : index == 1
+                    ? Container(
+                        child: Text('$index'),
+                      )
+                    : index == 2
+                        ? Container(
+                            child: Text('$index'),
+                          )
+                        : Container(
+                            child: Text('$index'),
+                          );
+          }),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           color: Color(0xFFE31640),
@@ -130,6 +87,9 @@ class _HomeState extends State<Home> {
               onTabChange: (index) {
                 setState(() {
                   _selectedIndex = index;
+                  controller.animateToPage(index,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.ease);
                 });
               },
             ),
