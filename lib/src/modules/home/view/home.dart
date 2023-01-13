@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../../added_item/view/add_item.dart';
+import '../../profile/view/profile.dart';
 import '../screens/favourite_screen.dart';
 import '../screens/home_screen.dart';
 
@@ -53,7 +54,7 @@ class _HomeState extends State<Home> {
                     ? const FavouriteScreen()
                     : index == 2
                         ? Text('$index')
-                        : Text('$index');
+                        : const ProfileScreen();
           }),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(

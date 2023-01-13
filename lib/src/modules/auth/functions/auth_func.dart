@@ -23,12 +23,12 @@ class Auth {
 
   Future<void> createUserWithEmailAndPassword(WidgetRef ref) async {
     await _auth.signInWithEmailAndPassword(
-      email: ref.read(emainCntrlPd).toString().trim(),
-      password: ref.read(passwordCntrlPd).toString().trim(),
+      email: ref.read(emainCntrlPd).text.toString().trim(),
+      password: ref.read(passwordCntrlPd).text.toString().trim(),
     );
   }
 
-  Future<void> signOut() async {
-    await _auth.signOut();
-  }
+  // Future<void> signOut() async {
+  //   await _auth.signOut();
+  // }
 }
