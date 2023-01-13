@@ -1,13 +1,19 @@
 import 'dart:ui';
 
+import 'package:elven_food_app/src/modules/auth/functions/auth_func.dart';
 import 'package:elven_food_app/src/modules/auth/view/signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SignInPage extends StatelessWidget {
+import '../../home/view/home.dart';
+import '../provider/auth_pd.dart';
+
+class SignInPage extends ConsumerWidget {
   const SignInPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -38,8 +44,10 @@ class SignInPage extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                     const SizedBox(height: 100),
-                    const TextField(
-                      decoration: InputDecoration(
+                    TextField(
+                      controller: ref.watch(emainCntrlPd),
+                      style: const TextStyle(color: Colors.white),
+                      decoration: const InputDecoration(
                         hintText: 'Email',
                         hintStyle: TextStyle(
                           color: Colors.white,
@@ -57,8 +65,11 @@ class SignInPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 40),
-                    const TextField(
-                      decoration: InputDecoration(
+                    TextField(
+                      controller: ref.watch(passwordCntrlPd),
+                      style: const TextStyle(color: Colors.white),
+                      obscureText: true,
+                      decoration: const InputDecoration(
                         hintText: 'Password',
                         hintStyle: TextStyle(
                           color: Colors.white,
@@ -77,7 +88,21 @@ class SignInPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 40),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        try {
+                          await Auth().signInWithEmailAndPassword(ref);
+                          if (Auth().signInWithEmailAndPassword(ref) ==
+                              FirebaseAuth.instance.currentUser) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Home()),
+                            );
+                          }
+                        } catch (e) {
+                          print(e);
+                        }
+                      },
                       child: const Text('Sign In'),
                     ),
                     const SizedBox(height: 50),

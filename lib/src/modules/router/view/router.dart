@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart' show BuildContext, Key, Widget;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart' show BuildContext, Key, StreamBuilder, Widget;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'
     show AppLocalizations;
 import 'package:flutter_riverpod/flutter_riverpod.dart'
@@ -19,6 +20,15 @@ class AppRouter extends ConsumerWidget {
     t = AppLocalizations.of(context);
     // Check if Auth is needed
     //return const Home();
-    return const SignInPage();
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return const Home();
+        } else {
+          return const SignInPage();
+        }
+      },
+      );
   }
 }
