@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:elven_food_app/src/modules/auth/functions/auth_func.dart';
 import 'package:elven_food_app/src/modules/auth/view/signup.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -90,17 +89,15 @@ class SignInPage extends ConsumerWidget {
                     ElevatedButton(
                       onPressed: () async {
                         try {
-                          await Auth().signInWithEmailAndPassword(ref);
-                          if (Auth().signInWithEmailAndPassword(ref) ==
-                              FirebaseAuth.instance.currentUser) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Home()),
-                            );
-                          }
+                          await Auth()
+                              .signInWithEmailAndPassword(ref)
+                              .then((_) => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Home()),
+                                  ));
                         } catch (e) {
-                          print(e);
+                          debugPrint(e.toString());
                         }
                       },
                       child: const Text('Sign In'),

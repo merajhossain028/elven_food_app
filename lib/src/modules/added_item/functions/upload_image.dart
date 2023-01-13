@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 
 Future<String?> uploadImageMobile(File? file) async {
   //
@@ -16,11 +17,11 @@ Future<String?> uploadImageMobile(File? file) async {
 
     final downloadUrl = await snapshot.ref.getDownloadURL();
 
-    print('Photo uploaded. Url: $downloadUrl');
+    debugPrint('Photo uploaded. Url: $downloadUrl');
 
     return downloadUrl;
   } catch (e) {
-    print('error in uploading image for : ${e.toString()}');
+    debugPrint('error in uploading image for : ${e.toString()}');
     return null;
   }
 }

@@ -52,12 +52,8 @@ class _HomeState extends State<Home> {
                 : index == 1
                     ? const FavouriteScreen()
                     : index == 2
-                        ? Container(
-                            child: Text('$index'),
-                          )
-                        : Container(
-                            child: Text('$index'),
-                          );
+                        ? Text('$index')
+                        : Text('$index');
           }),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
