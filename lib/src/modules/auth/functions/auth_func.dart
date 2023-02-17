@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path/path.dart';
 
 import '../provider/auth_pd.dart';
 
@@ -22,10 +24,17 @@ class Auth {
   }
 
   Future<void> createUserWithEmailAndPassword(WidgetRef ref) async {
-    await _auth.signInWithEmailAndPassword(
-      email: ref.read(emainCntrlPd).text.toString().trim(),
-      password: ref.read(passwordCntrlPd).text.toString().trim(),
-    );
+    // showDialog(
+    //     context: BuidContext(context),
+    //     builder: (context) => const CircularProgressIndicator());
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: ref.read(emainCntrlPd).text.toString().trim(),
+        password: ref.read(passwordCntrlPd).text.toString().trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   // Future<void> signOut() async {

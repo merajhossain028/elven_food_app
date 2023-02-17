@@ -1,12 +1,17 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SignUpPage extends StatelessWidget {
+import '../../home/view/home.dart';
+import '../functions/auth_func.dart';
+import '../provider/auth_pd.dart';
+
+class SignUpPage extends ConsumerWidget {
   const SignUpPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -41,8 +46,10 @@ class SignUpPage extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                       const SizedBox(height: 100),
-                      const TextField(
-                        decoration: InputDecoration(
+                      TextField(
+                        controller: ref.watch(signUpEmainCntrlPd),
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(
                           hintText: 'Email',
                           hintStyle: TextStyle(
                             color: Colors.white,
@@ -60,8 +67,11 @@ class SignUpPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 40),
-                      const TextField(
-                        decoration: InputDecoration(
+                      TextField(
+                        controller: ref.watch(signUpPasswordCntrlPd),
+                        style: const TextStyle(color: Colors.white),
+                        obscureText: true,
+                        decoration: const InputDecoration(
                           hintText: 'Password',
                           hintStyle: TextStyle(
                             color: Colors.white,
@@ -79,8 +89,11 @@ class SignUpPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 40),
-                      const TextField(
-                        decoration: InputDecoration(
+                      TextField(
+                        controller: ref.watch(confirmPasswordCntrlPd),
+                        style: const TextStyle(color: Colors.white),
+                        obscureText: true,
+                        decoration: const InputDecoration(
                           hintText: 'Confirm Password',
                           hintStyle: TextStyle(
                             color: Colors.white,
@@ -99,7 +112,26 @@ class SignUpPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 40),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (ref.read(passwordCntrlPd).text !=
+                              ref.read(confirmPasswordCntrlPd).text) {
+                            const SnackBar(
+                              content: Text('Passwords do not match'),
+                            );
+                          } else {
+                            try {
+                              Auth()
+                                  .createUserWithEmailAndPassword(ref)
+                                  .then((_) => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => const Home()),
+                                      ));
+                            } catch (e) {
+                              debugPrint(e.toString());
+                            }
+                          }
+                        },
                         child: const Text('Sign Up'),
                       ),
                     ],

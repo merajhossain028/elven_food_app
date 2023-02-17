@@ -9,6 +9,13 @@ final emainCntrlPd = Provider((ref) {
 
   return cntrlr;
 });
+final signUpEmainCntrlPd = Provider((ref) {
+  final cntrlr = TextEditingController();
+
+  ref.onDispose(() => cntrlr.dispose());
+
+  return cntrlr;
+});
 
 final passwordCntrlPd = Provider((ref) {
   final cntrlr = TextEditingController();
@@ -17,5 +24,20 @@ final passwordCntrlPd = Provider((ref) {
 
   return cntrlr;
 });
+final signUpPasswordCntrlPd = Provider((ref) {
+  final cntrlr = TextEditingController();
 
-final firebaseAuthProvider = Provider((ref) => FirebaseAuth.instance);
+  ref.onDispose(() => cntrlr.dispose());
+
+  return cntrlr;
+});
+
+final confirmPasswordCntrlPd = Provider((ref) {
+  final cntrlr = TextEditingController();
+
+  ref.onDispose(() => cntrlr.dispose());
+
+  return cntrlr;
+});
+
+final firebaseAuthProvider = Provider((ref) => FirebaseAuth.instance.signOut());

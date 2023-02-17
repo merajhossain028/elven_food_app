@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../auth/provider/auth_pd.dart';
 import '../../auth/view/signin.dart';
@@ -32,15 +33,16 @@ class ProfileScreen extends ConsumerWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    firebaseAuthProvider;
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SignInPage(),
-                      ),
-                    );
+                    // firebaseAuthProvider;
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const SignInPage(),
+                    //   ),
+                    // );
+                    FirebaseAuth.instance.signOut();
                   },
-                  child: Text('Sign Out'),
+                  child: const Text('Sign Out'),
                 ),
               ],
             ),
